@@ -366,19 +366,25 @@ let nonWorkingDayNums = empDailyHrsAndWageArr
 
 console.log("UC 11D NonWorking DayNums: " + nonWorkingDayNums);
 
+// UC12
 class EmployeePayrollData {
-  // property
+  // properties
   id;
+  name;
   salary;
-  // constructor
+  gender;
+  startDate;
 
-  constructor(id, name, salary) {
+  // constructor
+  constructor(id, name, salary, gender, startDate) {
     this.id = id;
     this.name = name;
     this.salary = salary;
+    this.gender = gender;
+    this.startDate = startDate;
   }
-  // getter and setter method
 
+  // getter and setter methods
   get name() {
     return this._name;
   }
@@ -386,17 +392,28 @@ class EmployeePayrollData {
   set name(name) {
     this._name = name;
   }
+
+  // method
   toString() {
-    return (
-      "id=" + this.id + ", name='" + this.name + "', salary=" + this.salary
-    );
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const empDate = this.startDate
+      ? this.startDate.toLocaleDateString("en-US", options)
+      : "undefined";
+    return `id=${this.id}, name=${this.name}, salary=${this.salary}, gender=${this.gender}, startDate=${empDate}`;
   }
 }
 
 let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
-
 console.log(employeePayrollData.toString());
 
-employeePayrollData.name = "john";
-
+employeePayrollData.name = "John";
 console.log(employeePayrollData.toString());
+
+let newEmployeePayrollData = new EmployeePayrollData(
+  2,
+  "Terrisa",
+  388080,
+  "F",
+  new Date()
+);
+console.log(newEmployeePayrollData.toString());
