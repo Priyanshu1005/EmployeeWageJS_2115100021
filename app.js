@@ -325,3 +325,78 @@ while (
 console.log(
   "UC 10 Showing Daily Hours Worked and Wage Earned: " + empDailyHrsAndWageArr
 );
+
+// UC 10A to UC 11D Using Object Functions along with Arrow Functions
+
+totalWages = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailywage > 0)
+  .reduce(
+    (totalWage, dailyHrsAndWage) => totalWage + dailyHrsAndWage.dailywage,
+    0
+  );
+
+totalHours = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailywage > 0)
+  .reduce(
+    (totalHours, dailyHrsAndWage) => totalHours + dailyHrsAndWage.dailyHours,
+    0
+  );
+
+console.log(
+  "UC 11A Total Hours: " + totalHours + " Total Wages: " + totalWages
+);
+
+process.stdout.write("UC 11B Logging Full Work Days");
+
+empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours == 8)
+  .forEach((dailyHrsAndWage) =>
+    process.stdout.write(dailyHrsAndWage.toString())
+  );
+
+let partWorkingDayStrArr = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours == 4)
+  .map((dailyHrsAndWage) => dailyHrsAndWage.toString());
+
+console.log("\nUC 11C PartWorkingDayStrings: " + partWorkingDayStrArr);
+
+let nonWorkingDayNums = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours == 0)
+  .map((dailyHrsAndWage) => dailyHrsAndWage.dayNum);
+
+console.log("UC 11D NonWorking DayNums: " + nonWorkingDayNums);
+
+class EmployeePayrollData {
+  // property
+  id;
+  salary;
+  // constructor
+
+  constructor(id, name, salary) {
+    this.id = id;
+    this.name = name;
+    this.salary = salary;
+  }
+  // getter and setter method
+
+  get name() {
+    return this._name;
+  }
+
+  set name(name) {
+    this._name = name;
+  }
+  toString() {
+    return (
+      "id=" + this.id + ", name='" + this.name + "', salary=" + this.salary
+    );
+  }
+}
+
+let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+
+console.log(employeePayrollData.toString());
+
+employeePayrollData.name = "john";
+
+console.log(employeePayrollData.toString());
