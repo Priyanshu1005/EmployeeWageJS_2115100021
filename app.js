@@ -418,7 +418,66 @@ console.log("UC 11D NonWorking DayNums: " + nonWorkingDayNums);
 // );
 // console.log(newEmployeePayrollData.toString());
 
-// UC13
+//  UC13
+
+// class EmployeePayrollData {
+//   // properties
+//   id;
+//   name;
+//   salary;
+//   gender;
+//   startDate;
+
+//   // constructor
+//   constructor(id, name, salary, gender, startDate) {
+//     this.id = id;
+//     this.name = name;
+//     this.salary = salary;
+//     this.gender = gender;
+//     this.startDate = startDate;
+//   }
+
+//   // getter and setter methods
+//   get name() {
+//     return this._name;
+//   }
+
+//   set name(name) {
+//     let nameRegex = RegExp("^[A-Z]{1}[a-z]{3,}$");
+//     if (nameRegex.test(name)) this._name = name;
+//     else throw "Name is Incorrect!";
+//   }
+
+//   // method
+//   toString() {
+//     const options = { year: "numeric", month: "long", day: "numeric" };
+//     const empDate = this.startDate
+//       ? this.startDate.toLocaleDateString("en-US", options)
+//       : "undefined";
+//     return `id=${this.id}, name=${this.name}, salary=${this.salary}, gender=${this.gender}, startDate=${empDate}`;
+//   }
+// }
+
+// let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+// console.log(employeePayrollData.toString());
+
+// try {
+//   employeePayrollData.name = "John";
+//   console.log(employeePayrollData.toString());
+// } catch (e) {
+//   console.error(e);
+// }
+
+// let newEmployeePayrollData = new EmployeePayrollData(
+//   2,
+//   "Terrisa",
+//   30000,
+//   "F",
+//   new Date()
+// );
+// console.log(newEmployeePayrollData.toString());
+
+// UC14
 
 class EmployeePayrollData {
   // properties
@@ -448,6 +507,34 @@ class EmployeePayrollData {
     else throw "Name is Incorrect!";
   }
 
+  get salary() {
+    return this._salary;
+  }
+
+  set salary(salary) {
+    if (salary > 0) this._salary = salary;
+    else throw "Salary must be a positive number!";
+  }
+
+  get gender() {
+    return this._gender;
+  }
+
+  set gender(gender) {
+    let genderRegex = RegExp("^[MF]$");
+    if (genderRegex.test(gender)) this._gender = gender;
+    else throw "Gender must be 'M' or 'F'!";
+  }
+
+  get startDate() {
+    return this._startDate;
+  }
+
+  set startDate(startDate) {
+    if (startDate <= new Date()) this._startDate = startDate;
+    else throw "Start Date cannot be a future date!";
+  }
+
   // method
   toString() {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -458,21 +545,30 @@ class EmployeePayrollData {
   }
 }
 
-let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
-console.log(employeePayrollData.toString());
-
 try {
-  employeePayrollData.name = "John";
+  let employeePayrollData = new EmployeePayrollData(
+    1,
+    "Mark",
+    30000,
+    "M",
+    new Date("2023-01-01")
+  );
   console.log(employeePayrollData.toString());
+
+  employeePayrollData.name = "John";
+  employeePayrollData.salary = 40000;
+  employeePayrollData.gender = "M";
+  employeePayrollData.startDate = new Date("2022-12-01");
+  console.log(employeePayrollData.toString());
+
+  let newEmployeePayrollData = new EmployeePayrollData(
+    2,
+    "Terrisa",
+    30000,
+    "F",
+    new Date()
+  );
+  console.log(newEmployeePayrollData.toString());
 } catch (e) {
   console.error(e);
 }
-
-let newEmployeePayrollData = new EmployeePayrollData(
-  2,
-  "Terrisa",
-  30000,
-  "F",
-  new Date()
-);
-console.log(newEmployeePayrollData.toString());
